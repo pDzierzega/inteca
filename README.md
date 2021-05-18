@@ -3,29 +3,33 @@ This is the evaluation task for job interview.
 To create docker images type: 
 
 
-cd .\inteca-customer\
-mvn spring-boot:build-image
-cd ..
+	cd .\inteca-customer\
+	mvn spring-boot:build-image
+	cd ..
 
-cd .\inteca-product\
-mvn spring-boot:build-image
-cd ..
+	cd .\inteca-product\
+	mvn spring-boot:build-image
+	cd ..
 
-cd .\inteca-credit\
-mvn spring-boot:build-image
-cd ..
+	cd .\inteca-credit\
+	mvn spring-boot:build-image
+	cd ..
+	
+Then, to start containers, type:
 
-docker-compose up
+	docker-compose up
 
 
 UC01:
 METHOD.POST http://localhost:7070/credits 
 HEADERS: Content-Type:application/json
-BODY: {
-    "credit":
+BODY: 
+
+
+	{
+     "credit":
     {
-        "creditName": "creditName example"
-        
+        	"creditName": "creditName example"
     },
     "product":
     {
@@ -38,7 +42,8 @@ BODY: {
         "surname": "surname example",
 		      "pesel": "123"
     }
-}
+	}
+
 
 
 UC01: METHOD.GET http://localhost:7070/credits 
