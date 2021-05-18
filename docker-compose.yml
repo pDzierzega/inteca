@@ -1,0 +1,44 @@
+version: '3'
+services:
+  inteca-credit:
+    image: inteca-credit:0.0.1-SNAPSHOT
+    ports:
+      - "7070:7070"
+    depends_on:
+       intecadb:
+            condition: service_healthy
+
+  inteca-product:
+    image: inteca-product:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    depends_on:
+      intecadb:
+        condition: service_healthy
+
+  inteca-customer:
+    image: inteca-customer:0.0.1-SNAPSHOT
+    ports:
+      - "9090:9090"
+    depends_on:
+      intecadb:
+        condition: service_healthy
+
+  intecadb:
+    container_name: 'intecadb'
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_USER: 'user'
+      MYSQL_DATABASE: inteca
+    ports:
+      - "3306:3306"
+    volumes:
+    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+
