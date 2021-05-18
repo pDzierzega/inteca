@@ -17,4 +17,29 @@ cd ..
 
 docker-compose up
 
+
+UC01:
+METHOD.POST http://localhost:7070/credits 
+HEADERS: Content-Type:application/json
+BODY: {
+    "credit":
+    {
+        "creditName": "creditName example"
+        
+    },
+    "product":
+    {
+        "productName": "productName example",
+        "value": "123"
+    },
+     "customer":
+    {
+        "firstName": "firstName example",
+        "surname": "surname example",
+		      "pesel": "123"
+    }
+}
+
+
+UC01: METHOD.GET http://localhost:7070/credits 
  
